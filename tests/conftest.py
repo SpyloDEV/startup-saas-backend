@@ -5,6 +5,7 @@ import pytest
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.pool import NullPool
 
 os.environ.setdefault("DATABASE_URL", "sqlite+aiosqlite:///./test_startup_saas.db")
 os.environ.setdefault("SECRET_KEY", "test-secret-key-for-local-pytest")
@@ -19,7 +20,7 @@ from app.main import app  # noqa: E402
 def engine_options(database_url: str) -> dict:
     if database_url.startswith("sqlite"):
         return {"connect_args": {"check_same_thread": False}}
-    return {}
+    return {"poolclass": NullPool}
 
 
 database_url = os.environ["DATABASE_URL"]

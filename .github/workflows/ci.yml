@@ -31,7 +31,7 @@ jobs:
     env:
       DATABASE_URL: postgresql+asyncpg://postgres:postgres@localhost:5432/startup_saas_test
       REDIS_URL: redis://localhost:6379/0
-      SECRET_KEY: test-secret-key
+      SECRET_KEY: test-secret-key-for-ci
       ENABLE_BACKGROUND_JOBS: "false"
 
     steps:
